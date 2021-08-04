@@ -1,7 +1,12 @@
-FROM nginx
+FROM centos:7
+
+RUN yum update -y 
+
+RUN yum provides '*/applydeltarpm' && yum install deltarpm -y \
+    yum install curl apt-transport-https -y
 
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 
 RUN curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
 
-RUN npm install -g yarn
+RUN yum install yarn nginx -y
